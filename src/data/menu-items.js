@@ -1,4 +1,4 @@
 export const menuItems = [
-    {value: 'abbotsford', label: 'Abbotsford'},
+    {value: 'surrey', label: 'Surrey'},
 	{value: 'vancouver', label: 'Vancouver'}
 ];

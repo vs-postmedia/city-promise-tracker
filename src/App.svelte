@@ -3,23 +3,24 @@
     import { onMount } from 'svelte';
     import { csvParse } from 'd3-dsv';
     import Chart from "$components/Chart.svelte";
-    import Map from "$components/Map.svelte";
     import Select from "svelte-select"; // https://github.com/rob-balfre/svelte-select
 
     // DATA
     // import data from "$data/data.js";
     import { menuItems } from "$data/menu-items";
-    const dataUrl = 'https://raw.githubusercontent.com/ajstarks/dubois-data-portraits/master/challenge/2024/challenge03/data.csv';
-    const mapDataUrl = 'https://vs-postmedia-data.sfo2.digitaloceanspaces.com/misc/mobi-top-bike-data.csv';
+    const dataUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTdPwb69KcPAH91-rkyHoPIVHaEYARJKRiHjm4i6gTHyobfMC-mAsX07IO-ASPbOF7GnUKcgzLq0HRt/pub?gid=0&single=true&output=csv';
 
     // VARIABLES
     let data = $state();
-    let mapData = $state();
     let value = $state();
+    let chartData = $derived(
+        data?.filter((row) => {
+            const selectedCity = typeof value === 'string' ? value : value?.value;
+            return row.city?.toLowerCase() === selectedCity?.toLowerCase();
+        }) ?? []
+    );
     const defaultSelectValue = menuItems[0].value;
 
-    // create .env in root dir & add VITE_MAPTILER_API_KEY for Map.svelte
-    const apiKey = import.meta.env.VITE_MAPTILER_API_KEY;
 
     async function fetchData(url) {
         const resp = await fetch(url);
@@ -39,13 +40,8 @@
         // fetch remote data
         data = await fetchData(dataUrl);
 
-        // fetch map data
-        mapData = await fetchData(mapDataUrl);
-
         // default display selector value
         value = defaultSelectValue;
-
-        console.log(mapData);
     }
 
     onMount(init);
@@ -66,20 +62,14 @@
     />
     
     <Chart 
-        data={data}
+        data={chartData}
         value={value}
     />
-    {#if mapData}
-        <Map
-            apiKey={apiKey}
-            data={mapData}
-        />
-    {/if}
 </main>
 
 <footer>
     <p class="note">NOTE: tk.</p>
-    <p class="source">Source:  <a href="https:vancouversun.com" target="_blank">TK</a></p>
+    <p class="source">Source:  <a href="https:vancouversun.com" target="_blank">Postmedia reporting</a></p>
 </footer>
   
 <style>
