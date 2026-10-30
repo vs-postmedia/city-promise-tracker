@@ -3,6 +3,8 @@
     import { onMount } from 'svelte';
     import { csvParse } from 'd3-dsv';
     import Chart from "$components/Chart.svelte";
+    import Filters from "$components/Filters.svelte";
+    import Cards from "$components/Cards/Cards.svelte";
     import Select from "svelte-select"; // https://github.com/rob-balfre/svelte-select
 
     // DATA
@@ -13,17 +15,18 @@
     // VARIABLES
     let data = $state();
     let value = $state();
+    let activeCategory = $state('');
     let chartData = $derived(
         data?.filter((row) => {
             const selectedCity = typeof value === 'string' ? value : value?.value;
             return row.city?.toLowerCase() === selectedCity?.toLowerCase();
         }) ?? []
     );
-    const defaultSelectValue = menuItems[0].value;
+    const defaultSelectValue = 'vancouver'; // menuItems[0].value;
 
 
     async function fetchData(url) {
-        const resp = await fetch(url);
+        const resp = await fetch(url, { cache: 'no-store' });
         const data = await resp.text();
 
         return csvParse(data);
@@ -40,16 +43,19 @@
         // fetch remote data
         data = await fetchData(dataUrl);
 
-        // default display selector value
-        value = defaultSelectValue;
+        // get city from URL params
+        const urlParams = new URLSearchParams(window.location.search);
+
+        const urlCity = urlParams.get('city');
+        value = menuItems.find(item => item.value === urlCity) ?? defaultSelectValue;
     }
 
     onMount(init);
 </script>
 
 <header>
-    <h1>VS SvelteKit Template</h1>
-    <p class="subhead">Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+    <h1>Promise tracker</h1>
+    <p class="subhead">Politicians make a lot of promises on the campaign trail. Postmedia is tracking some of them.</p>
 </header>
 
 <main>
@@ -61,15 +67,26 @@
 		listOpen={false}
     />
     
+    <Filters
+        data={chartData}
+        bind:active={activeCategory}
+    />
+
     <Chart 
         data={chartData}
+        value={value}
+    />
+    
+    <Cards 
+        data={chartData}
+        active={activeCategory}
         value={value}
     />
 </main>
 
 <footer>
     <p class="note">NOTE: tk.</p>
-    <p class="source">Source:  <a href="https:vancouversun.com" target="_blank">Postmedia reporting</a></p>
+    <p class="source">Source:  Postmedia reporting</p>
 </footer>
   
 <style>

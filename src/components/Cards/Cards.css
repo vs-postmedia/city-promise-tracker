@@ -1,0 +1,81 @@
+
+    .card {
+        border-radius: 15px;
+        margin: 0.75rem 0;
+        cursor: pointer;
+    }
+    .card > header {
+        border-radius: 10px 10px 0 0;
+        padding: 8px;
+    }
+    .card > header > h2,
+    .card > header > p {
+        color: #FFF !important;
+    }
+    .card > p {
+        padding: 10px 5px;
+    }
+    .card > .details {
+        display: grid;
+        grid-template-rows: 0fr;
+        opacity: 0;
+        padding: 10px 5px;
+        transition: grid-template-rows 0.35s ease, opacity 0.35s ease;
+    }
+    .card.open > .details {
+        grid-template-rows: 1fr;
+        opacity: 1;
+    }
+    .details-inner {
+        overflow: hidden;
+        min-height: 0;
+        padding-top: 15px;
+    }
+    @media (prefers-reduced-motion: reduce) {
+        .card > .details {
+            transition: none;
+        }
+    }
+
+    /* card border/header colours */
+    .card.stalled {
+        border: 3px solid var(--yellow01);
+    }
+    .card.stalled > header {
+        background-color: var(--yellow01);
+    }
+     .card.unaddressed {
+        border: 3px solid var(--yellow01);
+    }
+    .card.unaddressed > header {
+        background-color: var(--yellow01);
+    }
+    .card.complete {
+        border: 3px solid var(--green01);
+    }
+    .card.complete > header{
+        background-color: var(--green01);
+    }
+    .card.broken {
+        border: 3px solid var(--red01);
+    }
+    .card.broken > header {
+        background-color: var(--red01);
+    }
+    .card.in-progress {
+        border: 3px solid var(--grey02);
+    }
+    .card.in-progress > header {
+        background-color: var(--grey02);
+    }
+    
+
+    @media screen and (min-width: 480px) {
+        .card {
+            max-width: 48%;
+        }
+    }
+
+.card.hidden {
+    display: none;
+}

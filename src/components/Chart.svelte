@@ -19,7 +19,7 @@
 	};
 
     $effect(() => {
-        console.log(data);
+        // console.log(data);
     });
 
     // FUNCTIONS
@@ -34,9 +34,16 @@
     onMount(init);
 </script>
 
-<pre>{`CHART: Resolved data = ${JSON.stringify(data)}`}</pre>
-<pre>CHART: Combobox value = {value || 'No selection'}</pre>
-
 <div class="chart-container" bind:clientWidth={width}>
-
+    <p>Chart goes here....</p>
 </div>
+
+
+<style>
+    .chart-container {
+        border: 2px solid var(--orange01);
+        height: 200px;
+        margin: 0 auto 1rem auto;
+        max-width: 500px;
+    }
+</style>
