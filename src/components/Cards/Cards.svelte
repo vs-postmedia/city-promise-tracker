@@ -5,7 +5,7 @@
     // COMPONENTS
     import Tooltip from '$components/Tooltip.svelte';
 
-    let { data = [], value = '', active = '' } = $props();
+    let { data = [], value = '', active = '', activeStatus = '' } = $props();
 
     // VARS
     let tooltipData = $state();
@@ -46,7 +46,8 @@
         <div
             class="card {entry.status.replace(/ /g, '-').toLowerCase()} {entry.category.toLowerCase()}"
             class:open={openCards[i]}
-            class:hidden={active && active !== entry.category.toLowerCase()}
+            class:hidden={(active && active !== entry.category.toLowerCase()) ||
+                (activeStatus && activeStatus !== entry.status.replace(/ /g, '-').toLowerCase())}
             role="button"
             tabindex="0"
             aria-expanded={!!openCards[i]}

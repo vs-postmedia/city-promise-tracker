@@ -2,7 +2,7 @@
     // COMPONENTS
     import { onMount } from 'svelte';
     import { csvParse } from 'd3-dsv';
-    import Chart from "$components/Chart.svelte";
+    import Chart from "$components/Chart/Chart.svelte";
     import Filters from "$components/Filters.svelte";
     import Cards from "$components/Cards/Cards.svelte";
     import Select from "svelte-select"; // https://github.com/rob-balfre/svelte-select
@@ -16,6 +16,7 @@
     let data = $state();
     let value = $state();
     let activeCategory = $state('');
+    let activeStatus = $state('');
     let chartData = $derived(
         data?.filter((row) => {
             const selectedCity = typeof value === 'string' ? value : value?.value;
@@ -69,6 +70,7 @@
 
     <Chart 
         data={chartData}
+        bind:activeStatus
         value={value}
     />
 
@@ -81,6 +83,7 @@
     <Cards 
         data={chartData}
         active={activeCategory}
+        {activeStatus}
         value={value}
     />
 </main>
