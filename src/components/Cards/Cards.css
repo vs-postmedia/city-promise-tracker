@@ -1,19 +1,37 @@
-
+    .cards-container {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        max-height: 1500px;
+        overflow-y: auto;
+    }
     .card {
         border-radius: 15px;
         margin: 0.75rem 0;
         cursor: pointer;
+        max-width: 45%;
     }
     .card > header {
+        align-items: flex-end;
         border-radius: 10px 10px 0 0;
+        display: flex;
+        justify-content: space-between;
         padding: 8px;
     }
-    .card > header > h2,
-    .card > header > p {
+    .card > header h2,
+    .card > header p {
         color: #FFF !important;
     }
     .card > p {
         padding: 10px 5px;
+    }
+    #app .card p.more-info {
+        color: var(--grey03);
+        font-family: BentonSansCond-RegItalic, italic;
+        font-size: 0.85rem;
+        margin: 0;
+        padding: 0 5px;
     }
     .card > .details {
         display: grid;
@@ -25,6 +43,7 @@
     .card.open > .details {
         grid-template-rows: 1fr;
         opacity: 1;
+        padding: 10px 5px;
     }
     .details-inner {
         overflow: hidden;
@@ -38,35 +57,29 @@
     }
 
     /* card border/header colours */
-    .card.stalled {
-        border: 3px solid var(--yellow01);
+    .card.no-action {
+        border: 3px solid var(--yellow03);
     }
-    .card.stalled > header {
-        background-color: var(--yellow01);
-    }
-     .card.unaddressed {
-        border: 3px solid var(--yellow01);
-    }
-    .card.unaddressed > header {
-        background-color: var(--yellow01);
+    .card.no-action > header {
+        background-color: var(--yellow03);
     }
     .card.complete {
-        border: 3px solid var(--green01);
+        border: 3px solid var(--green03);
     }
     .card.complete > header{
-        background-color: var(--green01);
+        background-color: var(--green03);
     }
     .card.broken {
-        border: 3px solid var(--red01);
+        border: 3px solid var(--red03);
     }
     .card.broken > header {
-        background-color: var(--red01);
+        background-color: var(--red03);
     }
     .card.in-progress {
-        border: 3px solid var(--grey02);
+        border: 3px solid var(--grey03);
     }
     .card.in-progress > header {
-        background-color: var(--grey02);
+        background-color: var(--grey03);
     }
     
 
@@ -78,4 +91,21 @@
 
 .card.hidden {
     display: none;
+}
+
+.link-container {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 8px;
+    margin-top: 10px;
+}
+.link-container button {
+    background: var(--grey03);
+    border: 2px solid var(--grey03);
+    border-radius: 20px;
+    color: #fff;
+    cursor: pointer;
+    font-family: 'BentonSansCond-Regular', sans-serif;
+    font-size: 1rem;
+    padding: 4px 14px;
 }

@@ -25,7 +25,7 @@
     .filters {
         display: flex;
         flex-wrap: wrap;
-        gap: 8px;
+        gap: 5px;
         margin: 1rem 0;
     }
     button {
@@ -35,8 +35,8 @@
         color: #fff;
         cursor: pointer;
         font-family: 'BentonSansCond-Regular', sans-serif;
-        font-size: 1rem;
-        padding: 4px 14px;
+        font-size: .75rem;
+        padding: 3px 12px;
     }
     button.off {
         background: transparent;

@@ -22,7 +22,7 @@
             return row.city?.toLowerCase() === selectedCity?.toLowerCase();
         }) ?? []
     );
-    const defaultSelectValue = 'vancouver'; // menuItems[0].value;
+    const defaultSelectValue = 'surrey'; // menuItems[0].value;
 
 
     async function fetchData(url) {
@@ -66,16 +66,17 @@
 		showChevron="true"
 		listOpen={false}
     />
-    
-    <Filters
-        data={chartData}
-        bind:active={activeCategory}
-    />
 
     <Chart 
         data={chartData}
         value={value}
     />
+
+    <Filters
+        data={chartData}
+        bind:active={activeCategory}
+    />
+
     
     <Cards 
         data={chartData}
@@ -84,10 +85,10 @@
     />
 </main>
 
-<footer>
+<!-- <footer>
     <p class="note">NOTE: tk.</p>
     <p class="source">Source:  Postmedia reporting</p>
-</footer>
+</footer> -->
   
 <style>
     @import '$css/normalize.css';

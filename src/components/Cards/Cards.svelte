@@ -21,16 +21,17 @@
 	};
 
     $effect(() => {
-        console.log(data);
+        // console.log(data);
     });
 
     // FUNCTIONS
-    function init() {
-        console.log('CARDS INIT!')
-    }
-
     function toggle(i) {
-        openCards[i] = !openCards[i];
+        const willOpen = !openCards[i];
+        openCards = willOpen ? { [i]: true } : {};
+    }
+    function openLink(event, url) {
+        event.stopPropagation();
+        if (url) window.open(url, '_blank', 'noopener');
     }
     function onKeydown(event, i) {
         if (event.key === 'Enter' || event.key === ' ') {
@@ -38,9 +39,6 @@
             toggle(i);
         }
     }
-
-    // LIGHTS! CAMERA! ACTION!
-    onMount(init);
 </script>
 
 <div class="cards-container" bind:clientWidth={width}>
@@ -53,17 +51,31 @@
             tabindex="0"
             aria-expanded={!!openCards[i]}
             onclick={() => toggle(i)}
-            onkeydown={(e) => onKeydown(e, i)}
+            onkeydown={(e) => e.target === e.currentTarget && onKeydown(e, i)}
         >
             <header>
-                <p class="category">{entry.category}</p>
-                <h2>{entry.title}</h2>
+                <div class="text">
+                    <p class="category">{entry.category}</p>
+                    <h2>{entry.title}</h2>
+                </div>   
+                <span style="font-size: 1.5rem; color:#FFF"> 
+                    <i class="fa-solid {entry.icon}"></i>
+                </span>
             </header>
             <p>{entry.description}</p>
+            <p class="more-info"> Click for more info...</p>
             <div class="details">
                 <div class="details-inner">
                     <h3>The latest</h3>
                     <p>{entry.progress}</p>
+                    <div class="link-container">
+                        {#if entry.url_latest}
+                            <button type="button" onclick={(e) => openLink(e, entry.url_stories)}>Read the latest</button>
+                        {/if}
+                        {#if entry.url_all}
+                            <button type="button" onclick={(e) => openLink(e, entry.url_docs)}>Find all our coverage</button>
+                        {/if}
+                    </div>
                 </div>
             </div>
         </div>
