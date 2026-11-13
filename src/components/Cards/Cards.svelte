@@ -31,6 +31,7 @@
     }
     function openLink(event, url) {
         event.stopPropagation();
+        console.log(url)
         if (url) window.open(url, '_blank', 'noopener');
     }
     function onKeydown(event, i) {
@@ -71,10 +72,10 @@
                     <p>{entry.progress}</p>
                     <div class="link-container">
                         {#if entry.url_latest}
-                            <button type="button" onclick={(e) => openLink(e, entry.url_stories)}>Read the latest</button>
+                            <button type="button" onclick={(e) => openLink(e, entry.url_latest)}>Read the latest</button>
                         {/if}
                         {#if entry.url_all}
-                            <button type="button" onclick={(e) => openLink(e, entry.url_docs)}>Find all our coverage</button>
+                            <button type="button" onclick={(e) => openLink(e, entry.url_all)}>Find all our coverage</button>
                         {/if}
                     </div>
                 </div>
