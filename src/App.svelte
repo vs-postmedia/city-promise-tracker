@@ -54,10 +54,10 @@
     onMount(init);
 </script>
 
-<header>
+<!-- <header>
     <h1>Promise tracker</h1>
     <p class="subhead">Politicians make a lot of promises on the campaign trail. Postmedia is tracking some of them.</p>
-</header>
+</header> -->
 
 <main>
     <Select items={menuItems}

@@ -72,10 +72,10 @@
                     <p>{entry.progress}</p>
                     <div class="link-container">
                         {#if entry.url_latest}
-                            <button type="button" onclick={(e) => openLink(e, entry.url_latest)}>Read the latest</button>
+                            <button type="button" onclick={(e) => openLink(e, entry.url_latest)}>Read our coverage</button>
                         {/if}
                         {#if entry.url_all}
-                            <button type="button" onclick={(e) => openLink(e, entry.url_all)}>Find all our coverage</button>
+                            <button type="button" onclick={(e) => openLink(e, entry.url_all)}>Red city reports</button>
                         {/if}
                     </div>
                 </div>
