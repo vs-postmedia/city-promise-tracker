@@ -65,21 +65,23 @@
                 </span>
             </header>
             <p>{entry.description}</p>
-            <p class="more-info"> Click for more info...</p>
-            <div class="details">
-                <div class="details-inner">
-                    <h3>The latest</h3>
-                    <p>{entry.progress}</p>
-                    <div class="link-container">
-                        {#if entry.url_latest}
-                            <button type="button" onclick={(e) => openLink(e, entry.url_latest)}>Read our coverage</button>
-                        {/if}
-                        {#if entry.url_all}
-                            <button type="button" onclick={(e) => openLink(e, entry.url_all)}>Red city reports</button>
-                        {/if}
+            {#if entry.progress.length > 0}
+                <p class="more-info"> Click for more info...</p>
+                <div class="details">
+                    <div class="details-inner">
+                        <h3>The latest</h3>
+                        <p>{entry.progress}</p>
+                        <div class="link-container">
+                            {#if entry.url_latest}
+                                <button type="button" onclick={(e) => openLink(e, entry.url_latest)}>Read our coverage</button>
+                            {/if}
+                            {#if entry.url_all}
+                                <button type="button" onclick={(e) => openLink(e, entry.url_all)}>Red city reports</button>
+                            {/if}
+                        </div>
                     </div>
                 </div>
-            </div>
+            {/if}
         </div>
     {/each}
 </div>
