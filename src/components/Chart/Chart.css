@@ -54,10 +54,10 @@
         height: 12px;
         width: 12px;
     }
-    .chart-container .in-progress { background: var(--blue04); }
+    .chart-container .in-progress { background: var(--blue02); }
     .chart-container .complete { background: var(--green03); }
     .chart-container .broken { background: var(--red03); color: #fff; }
-    .chart-container .no-action { background: #a7a9ab; }
+    .chart-container .no-action { background: var(--blue05); }
     .legend-btn {
         align-items: center;
         background: none;
